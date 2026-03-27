@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useCart } from '../context/CartContext';
 import sp1 from '../assets/sp1.png';
 import sp2 from '../assets/sp2.png';
 import sp3 from '../assets/sp3.png';
@@ -29,13 +30,14 @@ const products = [
 
 const ProductCard = ({ product }) => {
   const [hovered, setHovered] = useState(false);
+  const { addToCart } = useCart();
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="card border-0 text-center"
-      style={{ cursor: 'pointer', borderRadius: '4px', overflow: 'hidden' }}
+      className="card border-0 text-center h-100"
+      style={{ cursor: 'pointer', borderRadius: '8px', overflow: 'hidden' }}
     >
       <div className="position-relative d-flex align-items-center justify-content-center"
         style={{ backgroundColor: '#F7F7F7', height: '220px' }}>
@@ -47,10 +49,15 @@ const ProductCard = ({ product }) => {
         {hovered && (
           <div className="position-absolute d-flex flex-column gap-2"
             style={{ right: '10px', top: '50%', transform: 'translateY(-50%)' }}>
-            {['🛒', '🔍', '♡'].map((icon, i) => (
-              <div key={i} className="d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm"
-                style={{ width: '32px', height: '32px', fontSize: '14px' }}>
-                {icon}
+            {[
+              { icon: '🛒', action: () => addToCart(product) },
+              { icon: '🔍', action: () => {} },
+              { icon: '♡', action: () => {} },
+            ].map((btn, i) => (
+              <div key={i} onClick={btn.action}
+                className="d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm"
+                style={{ width: '32px', height: '32px', fontSize: '14px', cursor: 'pointer' }}>
+                {btn.icon}
               </div>
             ))}
           </div>
@@ -63,10 +70,16 @@ const ProductCard = ({ product }) => {
             <span key={i} style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: color, display: 'inline-block' }}></span>
           ))}
         </div>
-        <div className="d-flex justify-content-center gap-2">
+        <div className="d-flex justify-content-center gap-2 mb-2">
           <span className="fw-bold" style={{ color: '#FB2E86', fontSize: '13px' }}>{product.price}</span>
           <span style={{ color: '#aaa', fontSize: '12px', textDecoration: 'line-through' }}>{product.oldPrice}</span>
         </div>
+        <button
+          onClick={() => addToCart(product)}
+          className="btn btn-sm w-100 fw-bold"
+          style={{ backgroundColor: '#FB2E86', color: 'white', borderRadius: '4px', fontSize: '12px' }}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );

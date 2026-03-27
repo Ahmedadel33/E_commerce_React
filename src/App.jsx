@@ -6,6 +6,8 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ShopPage from './pages/ShopPage';
 import { useAuth } from './context/AuthContext';
+import ProfilePage from './pages/ProfilePage';
+import CartPage from './pages/CartPage';
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
@@ -29,6 +31,16 @@ function App() {
             <ShopPage />
           </ProtectedRoute>
         } />
+        <Route path="/profile" element={
+  <ProtectedRoute>
+    <ProfilePage />
+  </ProtectedRoute>
+} />
+<Route path="/cart" element={
+  <ProtectedRoute>
+    <CartPage />
+  </ProtectedRoute>
+} />
       </Routes>
       <Footer />
     </BrowserRouter>
