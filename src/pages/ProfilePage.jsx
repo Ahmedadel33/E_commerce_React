@@ -17,8 +17,8 @@ const ProfilePage = () => {
   const [passSuccess, setPassSuccess] = useState('');
   const [infoSuccess, setInfoSuccess] = useState('');
 
-  const orders = user?.orders || [];
 
+  const orders = user?.orders || [];
   const statusColor = (status) => {
     if (status === 'Delivered') return 'success';
     if (status === 'Pending') return 'warning';

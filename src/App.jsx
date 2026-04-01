@@ -5,45 +5,90 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ShopPage from './pages/ShopPage';
-import { useAuth } from './context/AuthContext';
+import AddProduct from './pages/AddProduct'; // استيراد الصفحة الجديدة
 import ProfilePage from './pages/ProfilePage';
 import CartPage from './pages/CartPage';
+import ProductDetails from './pages/ProductDetails';
+import { useAuth } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 
-const ProtectedRoute = ({ children }) => {
+ const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
   return user ? children : <Navigate to="/login" />;
 };
 
+ const AdminRoute = ({ children }) => {
+  const { user } = useAuth();
+  
+   const isAdmin = user?.role === 'admin' || user?.email === 'ahmed.a.tantawi@gmail.com';
+  
+  return isAdmin ? children : <Navigate to="/" />;
+};
+
+// 3. جارد لصفحات الـ Login والـ Register
+const PublicRoute = ({ children }) => {
+  const { user } = useAuth();
+  return !user ? children : <Navigate to="/" />;
+};
+
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/" element={
-          <ProtectedRoute>
-            <HomePage />
-          </ProtectedRoute>
-        } />
-        <Route path="/shop" element={
-          <ProtectedRoute>
-            <ShopPage />
-          </ProtectedRoute>
-        } />
-        <Route path="/profile" element={
-  <ProtectedRoute>
-    <ProfilePage />
-  </ProtectedRoute>
-} />
-<Route path="/cart" element={
-  <ProtectedRoute>
-    <CartPage />
-  </ProtectedRoute>
-} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          {/* صفحات عامة */}
+          <Route path="/login" element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          } />
+          <Route path="/register" element={
+            <PublicRoute>
+              <RegisterPage />
+            </PublicRoute>
+          } />
+
+          {/* صفحات المستخدم العادي المحمية */}
+          <Route path="/" element={
+              <HomePage />
+          } />
+          
+          <Route path="/shop" element={
+            <ProtectedRoute>
+              <ShopPage />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/profile" element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/cart" element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/product/:id" element={
+            <ProtectedRoute>
+              <ProductDetails />
+            </ProtectedRoute>
+          } />
+
+          {/* 4. صفحة الأدمن (إضافة منتج) - محمية بـ AdminRoute */}
+          <Route path="/add-product" element={
+            <AdminRoute>
+              <AddProduct />
+            </AdminRoute>
+          } />
+
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 

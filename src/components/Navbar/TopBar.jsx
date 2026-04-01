@@ -15,29 +15,65 @@ const TopBar = () => {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      fontSize: '12px'
+      fontSize: '12px',
+      zIndex: 1000 // لضمان إنه فوق أي عنصر تاني
     }}>
-      <div style={{ display: 'flex', gap: '20px' }}>
+      {/* الجزء الأيسر: بيانات المستخدم والزرار السحري */}
+      <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
         {user && (
           <>
-            <span onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
+            <span 
+              onClick={() => navigate('/profile')} 
+              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px' }}
+            >
               👤 {user.name}
             </span>
             <span>{user.email}</span>
+
+            {(user?.role === 'admin' ) && (
+              <button 
+                onClick={() => navigate('/add-product')}
+                style={{
+                  backgroundColor: '#FB2E86',
+                  color: 'white',
+                  border: 'none',
+                  padding: '3px 12px',
+                  borderRadius: '3px',
+                  cursor: 'pointer',
+                  fontSize: '11px',
+                  fontWeight: 'bold',
+                  marginLeft: '10px',
+                  transition: '0.3s',
+                  boxShadow: '0 0 8px rgba(251, 46, 134, 0.4)'
+                }}
+                onMouseOver={(e) => e.target.style.opacity = '0.8'}
+                onMouseOut={(e) => e.target.style.opacity = '1'}
+              >
+                Add Product +
+              </button>
+            )}
           </>
         )}
       </div>
-      <div style={{ display: 'flex', gap: '16px' }}>
-        <span>English ▾</span>
-        <span>USD ▾</span>
+
+      {/* الجزء الأيمن: الإعدادات واللانجوتش والكارت */}
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <span style={{ cursor: 'pointer' }}>English ▾</span>
+        <span style={{ cursor: 'pointer' }}>USD ▾</span>
+        
         {user ? (
-          <span onClick={logout} style={{ cursor: 'pointer' }}>Logout</span>
+          <span onClick={logout} style={{ cursor: 'pointer', fontWeight: 'bold' }}>Logout</span>
         ) : (
-          <span onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>Login</span>
+          <span onClick={() => navigate('/login')} style={{ cursor: 'pointer', fontWeight: 'bold' }}>Login</span>
         )}
-        <span>Wishlist ♡</span>
-        <span onClick={() => navigate('/cart')} style={{ cursor: 'pointer' }}>
-          🛒 {cart.length}
+        
+        <span style={{ cursor: 'pointer' }}>Wishlist ♡</span>
+        
+        <span 
+          onClick={() => navigate('/cart')} 
+          style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px' }}
+        >
+          🛒 {cart?.length || 0}
         </span>
       </div>
     </div>

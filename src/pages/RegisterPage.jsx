@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import API from '../api/axiosConfig';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -7,6 +9,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const validate = () => {
     const newErrors = {};
@@ -18,14 +21,33 @@ const RegisterPage = () => {
     return newErrors;
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    localStorage.setItem('user', JSON.stringify({ name, email, password }));
-    navigate('/login');
+
+    try {
+      const response = await API.post('/auth/register', { name, email, password });
+
+      const data = response.data;
+
+      if (data.token) {
+        login(data.user, data.token); 
+        alert("Account created successfully! ");
+        navigate('/');  
+      } else {
+        alert("Registration successful, but no token received. Please login.");
+        navigate('/login');
+      }
+
+    } catch (error) {
+      // معالجة الأخطاء القادمة من السيرفر (Axios catch)
+      console.error("Register Error:", error);
+      const serverMessage = error.response?.data?.message || "Failed to register. Please try again.";
+      alert(serverMessage);
+    }
   };
 
   return (

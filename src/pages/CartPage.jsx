@@ -1,110 +1,98 @@
+import React from 'react';
 import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+const BASE_URL = "http://localhost:5000";
 
 const CartPage = () => {
-  const { cart, removeFromCart, clearCart, total } = useCart();
-  const { user, login } = useAuth();
-  const navigate = useNavigate();
+  const { cart, removeFromCart, total, clearCart } = useCart();
 
-  const handleCheckout = () => {
-    if (cart.length === 0) return;
-
-    const newOrder = {
-      id: `#ORD${Date.now()}`,
-      date: new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }),
-      status: 'Pending',
-      total: `$${total.toFixed(2)}`,
-      items: cart,
-    };
-
-    const updatedUser = {
-      ...user,
-      orders: [...(user.orders || []), newOrder],
-    };
-
-    login(updatedUser);
-    localStorage.setItem('user', JSON.stringify(updatedUser));
-    clearCart();
-    navigate('/profile');
-  };
+  if (cart.length === 0) {
+    return (
+      <div className="container text-center" style={{ marginTop: '150px', marginBottom: '100px' }}>
+        <h2 style={{ color: '#151875' }}>عربة التسوق فارغة حالياً 🛒</h2>
+        <p className="text-muted">ابدأ بالتسوق وأضف بعض المنتجات الرائعة!</p>
+        <Link to="/shop" className="btn btn-lg text-white" style={{ backgroundColor: '#FB2E86' }}>
+          Back to Shop
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div className="py-4" style={{ backgroundColor: '#F2F0FF' }}>
-        <div className="container">
-          <h3 className="fw-bold mb-1" style={{ color: '#0D0E43' }}>Shopping Cart</h3>
-          <p className="mb-0" style={{ fontSize: '13px', color: '#8A8FB9' }}>
-            Home . <span style={{ color: '#FB2E86' }}>Cart</span>
-          </p>
-        </div>
-      </div>
-
-      <div className="py-5" style={{ backgroundColor: '#F7F7F7' }}>
-        <div className="container">
-          {cart.length === 0 ? (
-            <div className="text-center py-5">
-              <p style={{ fontSize: '48px' }}>🛒</p>
-              <h5 style={{ color: '#0D0E43' }}>Your cart is empty</h5>
-              <button onClick={() => navigate('/shop')} className="btn fw-bold mt-3 px-4"
-                style={{ backgroundColor: '#FB2E86', color: 'white', borderRadius: '8px' }}>
-                Continue Shopping
-              </button>
-            </div>
-          ) : (
-            <div className="row g-4">
-              {/* Cart Items */}
-              <div className="col-md-8">
-                <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
-                  <h6 className="fw-bold mb-4" style={{ color: '#0D0E43' }}>Cart Items ({cart.length})</h6>
-                  {cart.map(item => (
-                    <div key={item.id} className="d-flex align-items-center gap-3 mb-3 pb-3 border-bottom">
-                      <img src={item.img} alt={item.name}
-                        style={{ width: '80px', height: '80px', objectFit: 'contain', backgroundColor: '#F7F7F7', borderRadius: '8px' }} />
-                      <div className="flex-grow-1">
-                        <h6 className="fw-bold mb-1" style={{ color: '#0D0E43', fontSize: '14px' }}>{item.name}</h6>
-                        <p className="mb-0" style={{ color: '#FB2E86', fontSize: '13px', fontWeight: 'bold' }}>{item.price}</p>
-                        <p className="mb-0" style={{ color: '#8A8FB9', fontSize: '12px' }}>Qty: {item.qty}</p>
+    <div className="container" style={{ marginTop: '120px', marginBottom: '100px' }}>
+      <h2 className="fw-bold mb-5" style={{ color: '#1D3178' }}>Shopping Cart</h2>
+      
+      <div className="row">
+        {/* جدول المنتجات */}
+        <div className="col-lg-8">
+          <table className="table align-middle">
+            <thead style={{ color: '#1D3178' }}>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item) => (
+                <tr key={item._id}>
+                  <td>
+                    <div className="d-flex align-items-center gap-3">
+                      <img src={BASE_URL+item.image} alt={item.name} style={{ width: '60px', borderRadius: '5px' }} />
+                      <div>
+                        <p className="mb-0 fw-bold" style={{ color: '#000' }}>{item.name}</p>
+                        <small className="text-muted">Category: {item.category}</small>
                       </div>
-                      <button onClick={() => removeFromCart(item.id)} className="btn btn-sm"
-                        style={{ color: '#FB2E86', fontSize: '18px', background: 'none' }}>✕</button>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </td>
+                  <td>${item.price}.00</td>
+                  <td>
+                    <span className="badge bg-light text-dark p-2 border">{item.quantity}</span>
+                  </td>
+                  <td className="fw-bold">${item.price * item.quantity}.00</td>
+                  <td>
+                    <button 
+                      className="btn btn-sm btn-outline-danger"
+                      onClick={() => removeFromCart(item._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
+          <div className="d-flex justify-content-between mt-4">
+            <button className="btn text-white" style={{ backgroundColor: '#FB2E86' }} onClick={clearCart}>
+              Clear Cart
+            </button>
+            <Link to="/shop" className="btn btn-outline-primary">Update Cart</Link>
+          </div>
+        </div>
 
-              {/* Summary */}
-              <div className="col-md-4">
-                <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
-                  <h6 className="fw-bold mb-4" style={{ color: '#0D0E43' }}>Order Summary</h6>
-                  <div className="d-flex justify-content-between mb-2">
-                    <span style={{ color: '#8A8FB9', fontSize: '13px' }}>Subtotal</span>
-                    <span style={{ color: '#0D0E43', fontWeight: '600', fontSize: '13px' }}>${total.toFixed(2)}</span>
-                  </div>
-                  <div className="d-flex justify-content-between mb-2">
-                    <span style={{ color: '#8A8FB9', fontSize: '13px' }}>Shipping</span>
-                    <span style={{ color: '#2FD0B5', fontWeight: '600', fontSize: '13px' }}>Free</span>
-                  </div>
-                  <hr />
-                  <div className="d-flex justify-content-between mb-4">
-                    <span style={{ color: '#0D0E43', fontWeight: 'bold' }}>Total</span>
-                    <span style={{ color: '#FB2E86', fontWeight: 'bold' }}>${total.toFixed(2)}</span>
-                  </div>
-                  <button onClick={handleCheckout} className="btn w-100 fw-bold py-2"
-                    style={{ backgroundColor: '#FB2E86', color: 'white', borderRadius: '8px', fontSize: '14px' }}>
-                    Checkout
-                  </button>
-                  <button onClick={() => navigate('/shop')} className="btn w-100 fw-bold py-2 mt-2"
-                    style={{ backgroundColor: 'white', color: '#0D0E43', borderRadius: '8px', fontSize: '14px', border: '1px solid #ddd' }}>
-                    Continue Shopping
-                  </button>
-                </div>
-              </div>
+        {/* ملخص الحساب (Cart Totals) */}
+        <div className="col-lg-4">
+          <h4 className="text-center mb-4" style={{ color: '#1D3178' }}>Cart Totals</h4>
+          <div className="p-4" style={{ backgroundColor: '#F4F4FC', borderRadius: '5px' }}>
+            <div className="d-flex justify-content-between mb-3 border-bottom pb-2">
+              <span className="fw-bold">Subtotals:</span>
+              <span>${total}.00</span>
             </div>
-          )}
+            <div className="d-flex justify-content-between mb-4 border-bottom pb-2">
+              <span className="fw-bold">Totals:</span>
+              <span style={{ color: '#151875' }} className="fw-bold">${total}.00</span>
+            </div>
+            <p className="text-muted small">√ Shipping & taxes calculated at checkout</p>
+            <button className="btn w-100 text-white fw-bold" style={{ backgroundColor: '#19D16F', border: 'none' }}>
+              Proceed To Checkout
+            </button>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

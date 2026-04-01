@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import API from '../api/axiosConfig';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -17,23 +18,40 @@ const LoginPage = () => {
     return newErrors;
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user && user.email === email && user.password === password) {
-      login(user);
-      navigate('/');
-    } else {
-      setErrors({ general: 'Invalid email or password' });
+
+    try {
+      const res = await API.post('/auth/login', { 
+        email, 
+        password 
+      });
+
+      if (res.data) {
+        const userData = res.data.user;
+
+        login(userData,res.data.token); 
+      
+        // localStorage.setItem('loggedInUser', JSON.stringify(userData));
+        // localStorage.setItem('token', JSON.stringify(res.data.token));
+
+
+        navigate('/');
+      }
+      
+    } catch (err) {
+      const errorMsg = err.response?.data?.message || 'Invalid email or password';
+      setErrors({ general: errorMsg });
     }
   };
 
   return (
     <>
+      {/* الجزء العلوي - Breadcrumbs */}
       <div className="py-4" style={{ backgroundColor: '#F2F0FF' }}>
         <div className="container">
           <h3 className="fw-bold mb-1" style={{ color: '#0D0E43' }}>My Account</h3>
@@ -48,7 +66,7 @@ const LoginPage = () => {
           <div className="card border-0 p-5 shadow-sm" style={{ width: '100%', maxWidth: '500px', borderRadius: '8px' }}>
             <h4 className="fw-bold text-center mb-2" style={{ color: '#0D0E43' }}>Login</h4>
             <p className="text-center mb-4" style={{ fontSize: '13px', color: '#8A8FB9' }}>
-              Please login using account detail bellow.
+              Please login using account detail below.
             </p>
 
             {errors.general && (
