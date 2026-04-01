@@ -51,8 +51,7 @@ const LoginPage = () => {
 
   return (
     <>
-      {/* الجزء العلوي - Breadcrumbs */}
-      <div className="py-4" style={{ backgroundColor: '#F2F0FF' }}>
+       <div className="py-4" style={{ backgroundColor: '#F2F0FF' }}>
         <div className="container">
           <h3 className="fw-bold mb-1" style={{ color: '#0D0E43' }}>My Account</h3>
           <p className="mb-0" style={{ fontSize: '13px', color: '#8A8FB9' }}>

@@ -43,8 +43,7 @@ const RegisterPage = () => {
       }
 
     } catch (error) {
-      // معالجة الأخطاء القادمة من السيرفر (Axios catch)
-      console.error("Register Error:", error);
+       console.error("Register Error:", error);
       const serverMessage = error.response?.data?.message || "Failed to register. Please try again.";
       alert(serverMessage);
     }

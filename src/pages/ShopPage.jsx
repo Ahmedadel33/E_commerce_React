@@ -10,7 +10,7 @@ const ShopPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { addToCart } = useCart(); // استدعاء دالة إضافة للسلة
+  const { addToCart } = useCart();  
 
   const fetchProducts = async () => {
     try {
@@ -33,7 +33,7 @@ const ShopPage = () => {
   if (loading)
     return (
       <div className="text-center py-5">
-        <h3>جاري تحميل المنتجات... 🚀</h3>
+        <h3>    waiting for products... </h3>
       </div>
     );
 
@@ -42,7 +42,7 @@ const ShopPage = () => {
   return (
     <div className="container py-5">
       <h2 className="text-center mb-5" style={{ color: "#151875" }}>
-        جميع المنتجات
+      all products
       </h2>
 
       <div className="row g-4">
@@ -51,8 +51,7 @@ const ShopPage = () => {
             <div className="col-md-3" key={product._id}>
               <div className="card h-100 shadow-sm border-0">
 
-                {/* الرابط لصفحة المنتج */}
-                <Link
+                 <Link
                   to={`/product/${product._id}`}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
@@ -92,7 +91,7 @@ const ShopPage = () => {
           ))
         ) : (
           <div className="text-center w-100">
-            <h4>لا يوجد منتجات حالياً.. ضيف أول منتج من صفحة الأدمن!</h4>
+            <h4> No products available at the moment. Add your first product from the admin page!  !</h4>
           </div>
         )}
       </div>

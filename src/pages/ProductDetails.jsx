@@ -42,8 +42,7 @@ const ProductDetails = () => {
           <p className="fs-4 fw-bold" style={{ color: '#FB2E86' }}>${product.price}.00</p>
           <p className="text-muted">{product.description || "تصميم عصري وجودة ممتازة."}</p>
 
-          {/* 3. تعديل الزرار ليقوم بالإضافة عند الضغط */}
-          <div className="d-flex gap-3 mt-4">
+           <div className="d-flex gap-3 mt-4">
             <button 
               className="btn btn-lg px-5 text-white" 
               style={{ backgroundColor: '#FB2E86', borderRadius: '5px' }}

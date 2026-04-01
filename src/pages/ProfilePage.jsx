@@ -80,8 +80,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      {/* Breadcrumb */}
-      <div className="py-4" style={{ backgroundColor: '#F2F0FF' }}>
+       <div className="py-4" style={{ backgroundColor: '#F2F0FF' }}>
         <div className="container">
           <h3 className="fw-bold mb-1" style={{ color: '#0D0E43' }}>My Profile</h3>
           <p className="mb-0" style={{ fontSize: '13px', color: '#8A8FB9' }}>
@@ -151,11 +150,9 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* Right */}
-            <div className="col-md-8 d-flex flex-column gap-4">
+             <div className="col-md-8 d-flex flex-column gap-4">
 
-              {/* Personal Info */}
-              <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
+               <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
                 <h6 className="fw-bold mb-4 d-flex align-items-center gap-2" style={{ color: '#0D0E43' }}>
                   <span style={{ backgroundColor: '#FB2E86', width: '4px', height: '20px', display: 'inline-block', borderRadius: '4px' }}></span>
                   Personal Information
@@ -179,8 +176,7 @@ const ProfilePage = () => {
                 </button>
               </div>
 
-              {/* Change Password */}
-              <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
+               <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
                 <h6 className="fw-bold mb-4 d-flex align-items-center gap-2" style={{ color: '#0D0E43' }}>
                   <span style={{ backgroundColor: '#7E33E0', width: '4px', height: '20px', display: 'inline-block', borderRadius: '4px' }}></span>
                   Change Password
@@ -210,8 +206,7 @@ const ProfilePage = () => {
                 </button>
               </div>
 
-              {/* Orders */}
-              <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
+               <div className="card border-0 shadow-sm p-4" style={{ borderRadius: '16px' }}>
                 <h6 className="fw-bold mb-4 d-flex align-items-center gap-2" style={{ color: '#0D0E43' }}>
                   <span style={{ backgroundColor: '#2FD0B5', width: '4px', height: '20px', display: 'inline-block', borderRadius: '4px' }}></span>
                   My Orders

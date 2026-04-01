@@ -65,8 +65,7 @@ const ProductCard = ({ product }) => {
   );
 };
 
-// المكون الرئيسي
-const LatestProducts = ({ products }) => {
+ const LatestProducts = ({ products }) => {
   const [activeTab, setActiveTab] = useState('New Arrival');
   const productList = products.products || [];
   console.log(products)
@@ -79,8 +78,7 @@ const LatestProducts = ({ products }) => {
       <div className="container">
         <h2 className="fw-bold mb-4" style={{ color: '#0D0E43' }}>Latest Products</h2>
 
-        {/* Tabs */}
-        <div className="d-flex justify-content-center gap-4 mb-5">
+         <div className="d-flex justify-content-center gap-4 mb-5">
           {tabs.map(tab => (
             <span
               key={tab}
@@ -108,7 +106,7 @@ const LatestProducts = ({ products }) => {
             ))
           ) : (
             <div className="col-12 py-5">
-              <p style={{ color: '#aaa' }}>لا توجد منتجات حالياً في قسم "{activeTab}"</p>
+              <p style={{ color: '#aaa' }}> No products available in this category at the moment. "{activeTab}"</p>
             </div>
           )}
         </div>

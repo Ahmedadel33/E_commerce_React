@@ -63,8 +63,7 @@ const DiscountItem = () => {
             </button>
           </div>
 
-          {/* Right - Image */}
-          <div className="col-md-6 text-center">
+           <div className="col-md-6 text-center">
             <div className="mx-auto d-flex align-items-center justify-content-center"
               style={{
                 backgroundColor: '#FFC0CB',

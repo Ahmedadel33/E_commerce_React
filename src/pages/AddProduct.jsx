@@ -91,7 +91,6 @@ const AddProduct = () => {
           style={inputStyle} 
         />
         
-        {/* Image Upload */}
         <div>
           <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>
             Upload Image:
@@ -105,7 +104,6 @@ const AddProduct = () => {
           />
         </div>
         
-        {/* Description */}
         <textarea 
           placeholder="Product Description" 
           value={description}
@@ -113,7 +111,6 @@ const AddProduct = () => {
           style={{ ...inputStyle, minHeight: '100px' }}
         />
         
-        {/* Submit Button */}
         <button 
           type="submit" 
           disabled={loading} 

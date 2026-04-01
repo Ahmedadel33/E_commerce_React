@@ -5,8 +5,7 @@ const Footer = () => {
 
   return (
     <footer>
-      {/* Main Footer */}
-      <div className="py-5" style={{ backgroundColor: '#EEEFFB' }}>
+       <div className="py-5" style={{ backgroundColor: '#EEEFFB' }}>
         <div className="container">
           <div className="row g-4">
 
@@ -45,8 +44,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Col 3 - Customer Care */}
-            <div className="col-6 col-md-3">
+             <div className="col-6 col-md-3">
               <h6 className="fw-bold mb-4" style={{ color: '#0D0E43' }}>Customer Care</h6>
               <ul className="list-unstyled">
                 {['My Account', 'Discount', 'Returns', 'Orders History', 'Order Tracking'].map((item, i) => (
@@ -57,8 +55,7 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Col 4 - Pages */}
-            <div className="col-6 col-md-3">
+             <div className="col-6 col-md-3">
               <h6 className="fw-bold mb-4" style={{ color: '#0D0E43' }}>Pages</h6>
               <ul className="list-unstyled">
                 {['Blog', 'Browse the Shop', 'Category', 'Pre-Built Pages', 'Visual Composer Elements', 'WooCommerce Pages'].map((item, i) => (
@@ -73,8 +70,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="py-3" style={{ backgroundColor: '#E7E4F8' }}>
+       <div className="py-3" style={{ backgroundColor: '#E7E4F8' }}>
         <div className="container d-flex justify-content-between align-items-center">
           <p className="mb-0" style={{ fontSize: '13px', color: '#8A8FB9' }}>
             ©Webecy - All Rights Reserved

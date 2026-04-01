@@ -6,8 +6,7 @@ const UniqueFeatures = () => {
       <div className="container">
         <div className="row align-items-center">
 
-          {/* Left - Image */}
-          <div className="col-md-6 text-center">
+           <div className="col-md-6 text-center">
             <div className="mx-auto d-flex align-items-center justify-content-center"
               style={{
                 backgroundColor: '#FFC0CB',
@@ -23,8 +22,7 @@ const UniqueFeatures = () => {
             </div>
           </div>
 
-          {/* Right - Content */}
-          <div className="col-md-6">
+           <div className="col-md-6">
             <h2 className="fw-bold mb-4" style={{ color: '#0D0E43', fontSize: '28px' }}>
               Unique Features Of leatest & Trending Poducts
             </h2>

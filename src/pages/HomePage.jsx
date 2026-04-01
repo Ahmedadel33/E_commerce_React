@@ -23,7 +23,7 @@ const HomePage = () => {
         setProducts(data); 
         setLoading(false);
       } catch (error) {
-        console.error("خطأ في جلب المنتجات:", error);
+        console.error(" wrong  from get products", error);
         setLoading(false);
       }
     };
@@ -35,8 +35,7 @@ const HomePage = () => {
     <>
       <Hero />
       
-      {/* 3. تمرير المنتجات كـ Props للمكونات اللي محتاجاها */}
-      {loading ? (
+       {loading ? (
         <h2 style={{ textAlign: 'center' }}>جاري التحميل...</h2>
       ) : (
         <>

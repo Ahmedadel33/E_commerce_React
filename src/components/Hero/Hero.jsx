@@ -12,8 +12,7 @@ const Hero = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Left Content */}
-      <div style={{ maxWidth: '500px', zIndex: 1 }}>
+       <div style={{ maxWidth: '500px', zIndex: 1 }}>
         <p style={{ color: '#FB2E86', fontSize: '14px', marginBottom: '8px' }}>
           Best Furniture For Your Casa...
         </p>
@@ -43,16 +42,14 @@ const Hero = () => {
           Shop Now
         </button>
 
-        {/* Dots */}
-        <div style={{ display: 'flex', gap: '8px', marginTop: '32px' }}>
+         <div style={{ display: 'flex', gap: '8px', marginTop: '32px' }}>
           <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#FB2E86', display: 'inline-block' }}></span>
           <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ccc', display: 'inline-block' }}></span>
           <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ccc', display: 'inline-block' }}></span>
         </div>
       </div>
 
-      {/* Right Image */}
-      <div style={{ position: 'relative' }}>
+       <div style={{ position: 'relative' }}>
         {/* 50% off badge */}
         <div style={{
           position: 'absolute',
@@ -75,8 +72,7 @@ const Hero = () => {
           <span>off</span>
         </div>
 
-        {/* Circle background */}
-        <div style={{
+         <div style={{
           width: '380px',
           height: '380px',
           borderRadius: '50%',

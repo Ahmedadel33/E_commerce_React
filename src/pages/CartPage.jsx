@@ -9,8 +9,8 @@ const CartPage = () => {
   if (cart.length === 0) {
     return (
       <div className="container text-center" style={{ marginTop: '150px', marginBottom: '100px' }}>
-        <h2 style={{ color: '#151875' }}>عربة التسوق فارغة حالياً 🛒</h2>
-        <p className="text-muted">ابدأ بالتسوق وأضف بعض المنتجات الرائعة!</p>
+        <h2 style={{ color: '#151875' }}>Your Shopping Cart is <Empty> </Empty> 🛒</h2>
+        <p className="text-muted">start shopping!</p>
         <Link to="/shop" className="btn btn-lg text-white" style={{ backgroundColor: '#FB2E86' }}>
           Back to Shop
         </Link>
@@ -23,8 +23,7 @@ const CartPage = () => {
       <h2 className="fw-bold mb-5" style={{ color: '#1D3178' }}>Shopping Cart</h2>
       
       <div className="row">
-        {/* جدول المنتجات */}
-        <div className="col-lg-8">
+         <div className="col-lg-8">
           <table className="table align-middle">
             <thead style={{ color: '#1D3178' }}>
               <tr>
@@ -73,8 +72,7 @@ const CartPage = () => {
           </div>
         </div>
 
-        {/* ملخص الحساب (Cart Totals) */}
-        <div className="col-lg-4">
+         <div className="col-lg-4">
           <h4 className="text-center mb-4" style={{ color: '#1D3178' }}>Cart Totals</h4>
           <div className="p-4" style={{ backgroundColor: '#F4F4FC', borderRadius: '5px' }}>
             <div className="d-flex justify-content-between mb-3 border-bottom pb-2">

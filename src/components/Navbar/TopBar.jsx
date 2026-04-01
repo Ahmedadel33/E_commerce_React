@@ -56,8 +56,7 @@ const TopBar = () => {
         )}
       </div>
 
-      {/* الجزء الأيمن: الإعدادات واللانجوتش والكارت */}
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+       <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
         <span style={{ cursor: 'pointer' }}>English ▾</span>
         <span style={{ cursor: 'pointer' }}>USD ▾</span>
         

@@ -4,8 +4,7 @@ import brands from '../../assets/brands.png';
 const Newsletter = () => {
   return (
     <>
-      {/* Newsletter Section */}
-      <section style={{
+       <section style={{
         backgroundImage: `url(${newsletterBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -28,8 +27,7 @@ const Newsletter = () => {
         </button>
       </section>
 
-      {/* Brands Section */}
-      <section className="py-4 bg-white">
+       <section className="py-4 bg-white">
         <div className="container">
           <img
             src={brands}

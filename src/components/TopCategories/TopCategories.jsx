@@ -41,8 +41,7 @@ const TopCategories = () => {
                     style={{ width: '160px', height: '160px', objectFit: 'contain' }}
                   />
 
-                  {/* View Shop button */}
-                  {activeId === cat.id && (
+                   {activeId === cat.id && (
                     <button className="btn btn-success btn-sm position-absolute"
                       style={{ bottom: '10px', fontSize: '12px', borderRadius: '4px' }}>
                       View Shop
@@ -57,8 +56,7 @@ const TopCategories = () => {
           ))}
         </div>
 
-        {/* Dots */}
-        <div className="d-flex justify-content-center gap-2 mt-3">
+         <div className="d-flex justify-content-center gap-2 mt-3">
           <span className="rounded-circle" style={{ width: '12px', height: '12px', backgroundColor: '#FB2E86', display: 'inline-block' }}></span>
           <span className="rounded-circle" style={{ width: '12px', height: '12px', backgroundColor: '#ccc', display: 'inline-block' }}></span>
           <span className="rounded-circle" style={{ width: '12px', height: '12px', backgroundColor: '#ccc', display: 'inline-block' }}></span>

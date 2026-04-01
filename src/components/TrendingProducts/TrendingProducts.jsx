@@ -69,8 +69,7 @@ const TrendingProducts = () => {
               ))}
             </div>
 
-            {/* Banner Cards */}
-            <div className="row g-3 mt-2">
+             <div className="row g-3 mt-2">
               <div className="col-md-6">
                 <div className="p-4 d-flex align-items-center gap-3"
                   style={{ backgroundColor: '#F2F0FF', borderRadius: '4px', minHeight: '120px' }}>
@@ -94,8 +93,7 @@ const TrendingProducts = () => {
             </div>
           </div>
 
-          {/* Right - side list */}
-          <div className="col-md-3">
+           <div className="col-md-3">
             {sideProducts.map(p => (
               <div key={p.id} className="d-flex align-items-center gap-3 mb-3 p-2"
                 style={{ backgroundColor: '#F7F7F7', borderRadius: '4px' }}>
