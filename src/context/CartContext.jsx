@@ -17,7 +17,6 @@ export const CartProvider = ({ children }) => {
           p._id === product._id ? { ...p, quantity: p.quantity + 1 } : p
         );
       }
-      // لو المنتج جديد بنضيفه وبنبدأ الكمية بـ 1
       return [...prev, { ...product, quantity: 1 }];
     });
   };
@@ -28,10 +27,8 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => setCart([]);
 
-  // حساب الإجمالي  
   const total = cart.reduce((acc, p) => acc + (p.price * p.quantity), 0);
   
-  // حساب عدد العناصر الكلي 
   const cartCount = cart.reduce((acc, p) => acc + p.quantity, 0);
 
   return (
